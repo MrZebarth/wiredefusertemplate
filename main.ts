@@ -4,6 +4,9 @@ namespace SpriteKind {
 function UpdateCursor () {
     cursor.top = Math.floor(120 / Ratio) * (cursorPos + 1) - 2
 }
+function InitSerial () {
+    SerialNumber = game.askForNumber("Last Digit of Serial Number", 1)
+}
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     WireList[cursorPos] = WireList[cursorPos] - 1
     if (WireList[cursorPos] < 0) {
@@ -102,6 +105,7 @@ let sprite_list: Sprite[] = []
 let WireSprites: Image[] = []
 let colourList: number[] = []
 let WireList: number[] = []
+let SerialNumber = 0
 let cursorPos = 0
 let Ratio = 0
 let cursor: Sprite = null
@@ -110,6 +114,9 @@ wireCount = 0
 enum phase {start, wire, solve}
 let state:phase=phase.start
 startPhase()
+if (wireCount > 3) {
+    InitSerial()
+}
 state += 1
 scene.setBackgroundColor(1)
 InitWirePhase()
